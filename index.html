@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Index!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes">
+        <meta name="HandheldFriendly" content="true">
+        <link rel="stylesheet" href="CSS/Common.css">
+        <style>
+
+            button {
+                width: 50px;
+                height: 50px;
+            }
+            table, tr, td {
+                border: 1px solid #6e6e6e;
+                border-collapse: collapse;
+            }
+
+            #numberId {
+                font-size: 40px;
+            }
+
+
+            table {
+                margin-bottom: 100px;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 style="font-weight: bold;">Alexle Toy Company</h1>
+            <h3>We make fun toys, perfect for 1-5 year olds!</h3>
+            <nav>
+                <a href="index.html" id="here" >Index/Home</a>
+                <a href="products.html">Products</a>
+                <a href="team.html">Team</a>
+            </nav>
+        </header>
+
+        <article>
+            <h2>
+                About us
+            </h2>
+
+            <div>
+
+                
+                <p>The Alexle Toy Company is well, a toy company. But we make toys from
+                    ... you guessed it! plastics, but not normal "fresh" plastics,
+                    we use recycled plastics! We don't just use plastics though, we use metal,
+                    recycled cardboard,...
+                </p>
+                <p> Some other entertaining stuff: </p>
+
+                 An amazing (Half working) Calculator !
+
+                 
+
+<table>            
+
+    <tbody>
+        <tr>
+            <td colspan="4" style="width: 100%; height: 40px;">
+                <div id = "optemp"></div>
+                <div style="width: 100%; height:100%; background-color: cyan; text-align: right"><strong id="numberId">0</strong></div>
+            </td>
+        </tr>
+        <tr>
+            <td><button onclick="clearAll()">CE</button></td>
+            <td><button>C</button></td>
+            <td><button>&#x3C;=</button></td>
+            <td><button onclick="operator_divide()">÷</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="getNumber(7)"  >7</button></td>
+            <td><button onclick="getNumber(8)">8</button></td>
+            <td><button onclick="getNumber(9)">9</button></td>
+            <td><button onclick="operator_multiply()">X</button></td>
+        </tr>
+
+        <tr> 
+            <td><button onclick="getNumber(4)">4</button></td>
+            <td><button onclick="getNumber(5)">5</button></td>
+            <td><button onclick="getNumber(6)">6</button></td>
+            <td><button onclick="operator_subtract()">-</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="getNumber(1)">1</button></td>
+            <td><button onclick="getNumber(2)">2</button></td>
+            <td><button onclick="getNumber(3)">3</button></td>
+            <td><button onclick="operator_add()">+</button></td>
+        </tr>
+
+        <tr>
+            <td><button>N/A</button></td>
+            <td><button onclick="getNumber(0)">0</button></td>
+            <td><button>N/A</button></td>
+            <td><button onclick="result_of_operations()">=</button></td>
+        </tr>
+           
+    </tbody>
+
+    
+
+        
+    </table>
+
+
+                
+
+
+            
+                
+            </div>
+            <div>
+
+            </div>
+
+            
+            
+
+        </article>
+
+        <footer class="footer">
+            <p class='tag'>
+
+            </p>
+        </footer>
+
+        <script src="JS/Last-date.js"></script>
+
+        <script>
+       
+            var result_number = ''
+    
+            function set_number_value(number){
+                document.getElementById("numberId").innerText = number;
+            }
+            function set_optemp_value(number){
+                document.getElementById("optemp").innerText = number;
+            }
+    
+            function clearAll(){
+               
+                result_number = '0'
+                set_number_value(result_number)
+            }
+    
+            function getNumber(number){
+                if (result_number == '0') 
+                    result_number = ''
+    
+                result_number = result_number + number.toString()                    
+                set_number_value(result_number)
+            }
+    
+            function operator_add(){
+                result_number += ' + ';
+                set_optemp_value(result_number)
+                result_number = '';
+            }
+    
+            function operator_divide(){
+                result_number += ' ÷ ';
+                set_optemp_value(result_number)
+                result_number = '';
+            }
+    
+            function operator_subtract(){
+                result_number += ' - ';
+                set_optemp_value(result_number)
+                result_number = '';
+            }
+    
+            function operator_multiply(){
+                result_number += ' x ';
+                set_optemp_value(result_number)
+                result_number = '';
+            }
+    
+            function result_of_operations(){
+                var opTemp = document.getElementById("optemp").innerText;
+               
+                    //console.info(opTemp)
+    
+                    if (opTemp.indexOf('+') > -1)
+                    {
+                        num1 = parseInt(opTemp.replace('+', ''));
+                        num2 = parseInt(result_number);
+    
+                        result = add(num1, num2);
+                        set_number_value(result)
+                        set_optemp_value(result_number)
+                        result_number = '';
+                    }
+    
+                    else if (opTemp.indexOf('-') > -1)
+                    {
+                       
+                        num1 = parseInt(opTemp.replace('-', ''));
+                        num2 = parseInt(result_number);
+    
+                        result = subtract(num1, num2);
+                        set_number_value(result)
+                        set_optemp_value(result_number)
+                        result_number = '';
+                    }
+    
+                    else if (opTemp.indexOf('x') > -1)
+                    {
+                       
+                        num1 = parseInt(opTemp.replace('x', ''));
+                        num2 = parseInt(result_number);
+    
+                        result = multiply(num1, num2);
+                        set_number_value(result)
+                        set_optemp_value(result_number)
+                        result_number = '';
+                    }
+                    
+                    else if (opTemp.indexOf('÷') > -1)
+                    {
+                        num1 = parseInt(opTemp.replace('÷', ''));
+                        num2 = parseInt(result_number);
+    
+                        result = divide(num1, num2);
+                        set_number_value(result)
+                        set_optemp_value(result_number)
+                        result_number = '';
+                    }
+                    
+                    
+                }
+    
+    
+                function divide(num1, num2){
+                    result = num1 / num2;
+                    return result;
+                }
+    
+                function add(num1, num2){
+                    result = num1 + num2;
+                    return result;
+                }
+    
+                function subtract(num1, num2){
+                    result = num1 - num2;
+                    return result;
+                }
+    
+                function multiply(num1, num2){
+                    result = num1 * num2;
+                    return result;
+                }
+            </script>
+    </body>
+</html>
